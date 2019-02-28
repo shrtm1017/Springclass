@@ -19,6 +19,7 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.ui.ModelMap;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.context.WebApplicationContext;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -56,12 +57,15 @@ public class RangerControllerTest extends WebTestConfig{
 		String viewName= mav.getViewName();
 		Map<String,Object> model =mav.getModel();
 		List<String> rangers = (List<String>) model.get("rangers");
+		List<String> boardGbList= (List<String>) model.get("boardGb");
 		logger.debug("rangers"+rangers);
 		/***Then***/
 		assertEquals("/ranger/rangerList", viewName);
-		assertNotNull("5",rangers );
+		assertEquals(4, boardGbList.size());
+		assertNotNull(boardGbList);
 		
 	}
+	
 	/**
 	* Method : testGetRanger
 	* 작성자 : PC03
@@ -77,11 +81,41 @@ public class RangerControllerTest extends WebTestConfig{
 		String viewName = mav.getViewName();
 		ModelMap modelMap =mav.getModelMap();
 		String ranger =(String) modelMap.get("ranger");
+		List<String> boardGbList= (List<String>) modelMap.get("boardGb");
 		/***When***/
 		logger.debug("ranger"+ranger);
 		/***Then***/
 		assertEquals("/ranger/ranger", viewName);
 		assertNotNull("2",ranger);
+		assertEquals(4,boardGbList.size());
+		assertNotNull(boardGbList);
+	}
+	/**
+	* Method : getRangersMav
+	* 작성자 : PC03
+	* 변경이력 :
+	* @throws Exception
+	* Method 설명 : ModelAndView객체를 이용한 리턴 테스트
+	*/
+	@Test
+	public void  getRangersMav() throws Exception{
+//		List<String> rangers = rangerService.getRangers();
+//		model.addAttribute("rangers",rangers);
+		MvcResult mvcResult= mockMvc.perform(get("/ranger/getRangerMav")).andReturn();
+		ModelAndView mav = mvcResult.getModelAndView();
+		//viewName
+		assertEquals("/ranger/rangerList", mav.getViewName());
+		assertEquals(5,((List<String>)mav.getModel().get("rangers")).size());
+	}
+	@Test
+	public void  getRangerParam() throws Exception{
+//		List<String> rangers = rangerService.getRangers();
+//		model.addAttribute("rangers",rangers);
+		MvcResult mvcResult= mockMvc.perform(get("/ranger/getRangerParam")).andReturn();
+		ModelAndView mav = mvcResult.getModelAndView();
+		//viewName
+		assertEquals("/ranger/rangerList", mav.getViewName());
+		assertEquals(5,((List<String>)mav.getModel().get("rangers")).size());
 	}
 
 }

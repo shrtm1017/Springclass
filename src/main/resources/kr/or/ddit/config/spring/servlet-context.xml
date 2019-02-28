@@ -25,4 +25,15 @@
 						<context:include-filter type="annotation" expression="org.springframework.stereotype.Repository"/>
 	
 </context:component-scan>
+<!-- Spring 파일 업로드를 위한 설정 
+	1.multipartResolver등록 (id,name은 multipartResolver로 정의되어있ㅇㅁ)
+	2.commons-fileupload 디펜던시 추가 (pom.xml)
+-->
+
+	<bean class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+		<property name="maxUploadSize" value="26214400"></property>
+		<property name="maxUploadSizePerFile" value="5242880"></property>
+	</bean>
+
+
 </beans>

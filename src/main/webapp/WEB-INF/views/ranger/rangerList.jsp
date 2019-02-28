@@ -20,9 +20,14 @@
 	<c:forEach items="${rangers }" var="ranger">
 		<tr>
 			<td>${ranger }</td>
+
 		</tr>
 		</c:forEach>
+		게시판 구분 : ${boardGb }
+		게시판 구분 : ${boardGb2 }
+		session scope : ${sessionscope.boardGb2 }
 	</tbody>
 </table>
+
 </body>
 </html>

@@ -7,6 +7,10 @@
 <title>Insert title here</title>
 </head>
 <body>
-	ranger: ${ranger }
+	ranger: ${rVo }
+	게시판 구분 : ${boardGb }
+	게시판 구분 : ${boardGb2 }
+	rangerVo : ${rangerVo }<br>
+	session scope : ${sessionScope.boardGb }
 </body>
 </html>

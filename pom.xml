@@ -15,6 +15,9 @@
   
   <properties>
   	<java.version>1.7</java.version>
+  	<spring.version>4.3.22.RELEASE</spring.version>
+  	<mybatis.version>3.5.0</mybatis.version>
+  	<juit.version>4.12</juit.version>
   </properties>
 <build>
 	<plugins>
@@ -35,6 +38,17 @@
     <scope>provided</scope>
 </dependency>
 <dependency>
+    <groupId>org.mybatis</groupId>
+    <artifactId>mybatis</artifactId>
+    <version>${mybatis.version}</version>
+    <scope>compile</scope><!-- scope default :compile
+    							maven bilid 과정 : compile - > test -> build -> deploy
+    										1.test : test 과정끼지만 필요한 dependency(ex : junit)
+    										2.compile : 배포까지 dependency 유지
+    										3.provided : 운영환경에서 제공되기때문에 배포할 필요없는 dependency
+    										4.system	: mvn centrial repository에서 모든 lib에 제공하지 않기 때문에 -->
+</dependency>
+<dependency>
 	<groupId>com.oracle</groupId>
 	<artifactId>ojdbc6</artifactId>
 	<version>12.1.0.2</version>
@@ -44,7 +58,7 @@
 <dependency>
     <groupId>junit</groupId>
     <artifactId>junit</artifactId>
-    <version>4.12</version>
+    <version>${juit.version}</version>
 <!--     <scope>test</scope> -->
 </dependency>
 <dependency>
@@ -61,60 +75,66 @@
 <dependency>
     <groupId>org.springframework</groupId>
     <artifactId>spring-context</artifactId>
-    <version>4.3.22.RELEASE</version>
+    <version>${spring.version}</version>
 </dependency>
 <!-- https://mvnrepository.com/artifact/org.springframework/spring-core -->
 <dependency>
     <groupId>org.springframework</groupId>
     <artifactId>spring-core</artifactId>
-    <version>4.3.22.RELEASE</version>
+    <version>${spring.version}</version>
 </dependency>
 <!-- https://mvnrepository.com/artifact/org.springframework/spring-core -->
 <dependency>
     <groupId>org.springframework</groupId>
     <artifactId>spring-beans</artifactId>
-    <version>4.3.22.RELEASE</version>
+    <version>${spring.version}</version>
 </dependency>
 <!-- https://mvnrepository.com/artifact/org.springframework/spring-core -->
 <dependency>
     <groupId>org.springframework</groupId>
     <artifactId>spring-webmvc</artifactId>
-    <version>4.3.22.RELEASE</version>
+    <version>${spring.version}</version>
 </dependency>
 <!-- https://mvnrepository.com/artifact/org.springframework/spring-core -->
 <dependency>
     <groupId>org.springframework</groupId>
     <artifactId>spring-web</artifactId>
-    <version>4.3.22.RELEASE</version>
+    <version>${spring.version}</version>
 </dependency>
 <!-- https://mvnrepository.com/artifact/org.springframework/spring-core -->
 <dependency>
     <groupId>org.springframework</groupId>
     <artifactId>spring-test</artifactId>
-    <version>4.3.22.RELEASE</version>
+    <version>${spring.version}</version>
     
 </dependency>
 <!-- https://mvnrepository.com/artifact/org.springframework/spring-core -->
 <dependency>
     <groupId>org.springframework</groupId>
     <artifactId>spring-aop</artifactId>
-    <version>4.3.22.RELEASE</version>
+    <version>${spring.version}</version>
 </dependency>
 <!-- https://mvnrepository.com/artifact/org.springframework/spring-core -->
 <dependency>
     <groupId>org.springframework</groupId>
     <artifactId>spring-orm</artifactId>
-    <version>4.3.22.RELEASE</version>
+    <version>${spring.version}</version>
 </dependency>
 <!-- https://mvnrepository.com/artifact/org.springframework/spring-core -->
 <dependency>
     <groupId>org.springframework</groupId>
     <artifactId>spring-jdbc</artifactId>
-    <version>4.3.22.RELEASE</version>
+    <version>${spring.version}</version>
 </dependency>
 
 
 
+<!-- https://mvnrepository.com/artifact/commons-fileupload/commons-fileupload -->
+<dependency>
+    <groupId>commons-fileupload</groupId>
+    <artifactId>commons-fileupload</artifactId>
+    <version>1.4</version>
+</dependency>
 
 
 

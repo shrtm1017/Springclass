@@ -3,12 +3,10 @@
   PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-config.dtd">
 <configuration>
-	<properties resource="kr/or/ddit/db/mybatis/db.properties"/>
+	<properties resource="kr/or/ddit/config/db/db.properties"/>
 	
 	<typeAliases>
 		<typeAlias alias="userVo" type="kr.or.ddit.user.model.UserVo"/>
-		<typeAlias alias="LprodVo" type="kr.or.ddit.lprod.model.LprodVo"/>
-		<typeAlias alias="prodVo" type="kr.or.ddit.prod.model.ProdVo"/>
 		<typeAlias alias="pageVo" type="kr.or.ddit.util.model.pageVo"/>
 	
 	</typeAliases>
@@ -24,8 +22,8 @@
     </environment>
   </environments>
   <mappers>
-    <mapper resource="kr/or/ddit/db/mybatis/mapper/user.xml"/>
-    <mapper resource="kr/or/ddit/db/mybatis/mapper/lprod.xml"/>
-    <mapper resource="kr/or/ddit/db/mybatis/mapper/prod.xml"/>
+    <mapper resource="kr/or/ddit/config/db/mapper/user.xml"/>
+<!--     <mapper resource="kr/or/ddit/db/mybatis/mapper/lprod.xml"/> -->
+<!--     <mapper resource="kr/or/ddit/db/mybatis/mapper/prod.xml"/> -->
   </mappers>
 </configuration>

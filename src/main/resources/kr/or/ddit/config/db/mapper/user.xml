@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="user">
+	<select id="getAllUser" resultType="userVo">
+		select * from users
+		<!-- where userId = jdbc 표현 #{userId} -->
+		<!-- 특정 사용자 조회(userId) selectUser(String userId) query,dao(test),service(test) -->
+	</select>
+	<select id="selectUser" resultType="userVo" parameterType="String" >
+		select * from users where userid=#{userId}
+</select>
+
+		<!-- 사용자 페이징 조회 -->
+  <select id="selectUserPagingList" resultType="userVo" parameterType="pageVo">
+     select *
+   from 
+       ( select a.*, rownum rn
+       from
+           (select users.*
+           from users
+           order by userid) a ) a
+   where rn between (#{page}-1) * #{pageSize}+1 and #{page} * #{pageSize}
+  </select>
+  
+  <!-- 전체 사용자 수 조회 -->
+  
+  <select id="getUserCnt" resultType="integer">
+  	select count(*)
+  	from users
+  
+  </select>
+	<!-- 사용자 입력 -->
+	<insert id="insertUser" parameterType="userVo">
+	insert into users
+		(userId,userNm,alias,addr1,addr2,zipcode,pass,reg_dt,filename,realFilename)
+values (#{userId},#{userNm},#{alias},#{addr1},#{addr2},#{zipcode},#{pass},sysdate,#{filename,jdbcType=VARCHAR},#{realFilename,jdbcType=VARCHAR})
+	</insert>
+	<!-- 사용자 삭제 -->
+	<delete id ="deleteUser" parameterType="String">
+		delete from users
+			where userId = #{userId}
+	</delete>
+	<update id="updateUser" parameterType="userVo">
+		update users set  
+		userId=#{userId},
+		userNm=#{userNm},
+		alias=nvl(#{alias,jdbcType=VARCHAR}, alias),
+		addr1=nvl(#{addr1,jdbcType=VARCHAR}, addr1),
+		addr2=nvl(#{addr2,jdbcType=VARCHAR}, addr2),
+		zipcode=nvl(#{zipcode,jdbcType=VARCHAR}, zipcode),
+		pass=#{pass},
+<!-- 		filename=#{filename}, -->
+<!-- 		realFilename=#{realFilename} -->
+		
+		filename=nvl(#{filename,jdbcType=VARCHAR}, filename),
+		realfilename = nvl(#{realFilename,jdbcType=VARCHAR}, realfilename)
+		
+		where userId=#{userId}
+	
+	</update>
+	
+	<update id="encrytPass" parameterType="userVo">
+		update users set pass=#{pass}
+		where userId=#{userId}
+	</update>
+</mapper>
