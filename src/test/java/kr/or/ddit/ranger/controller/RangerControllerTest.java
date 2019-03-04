@@ -114,8 +114,8 @@ public class RangerControllerTest extends WebTestConfig{
 		MvcResult mvcResult= mockMvc.perform(get("/ranger/getRangerParam")).andReturn();
 		ModelAndView mav = mvcResult.getModelAndView();
 		//viewName
-		assertEquals("/ranger/rangerList", mav.getViewName());
-		assertEquals(5,((List<String>)mav.getModel().get("rangers")).size());
+		assertEquals("/ranger/ranger", mav.getViewName());
+		assertNotNull(mav.getViewName());
 	}
 
 }

@@ -34,7 +34,7 @@
 					</tr>
 				</thead>
 				<tbody>
-				  <c:forEach items="${userpageList }" var ="user" varStatus="i">
+				  <c:forEach items="${userAllList }" var ="user" varStatus="i">
                 <%-- 향상된 for문은 begin이 없어서 i값을 구할 수 없음으로 varStatus를 이용해서 구한다 --%> 
                    <tr class='userTr' data-userid='${user.userId }'>
                       <td> ${i.index } </td>

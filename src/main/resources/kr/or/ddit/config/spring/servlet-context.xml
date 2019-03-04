@@ -30,7 +30,7 @@
 	2.commons-fileupload 디펜던시 추가 (pom.xml)
 -->
 
-	<bean class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+	<bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
 		<property name="maxUploadSize" value="26214400"></property>
 		<property name="maxUploadSizePerFile" value="5242880"></property>
 	</bean>
