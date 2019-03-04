@@ -63,5 +63,21 @@ private Logger logger = LoggerFactory.getLogger(UserControllerTest.class);
 		assertNotNull(userPagingList);
 //		assertTrue(userAllList.size()>100);//if문과 사용법이 동일하다.
 	}
+	@Test
+	public void testUser() throws Exception {
+		/***Given***/
+		
+		/***When***/
+		MvcResult mvcResult =mockMvc.perform(get("/user/user").param("userId","brown")).andReturn();
+		ModelAndView mav =mvcResult.getModelAndView();
+		String viewName = mav.getViewName();
+		UserVo user= (UserVo) mav.getModel().get("userVo");//내가 지은 객체명
+		/***Then***/
+		logger.debug("user:"+user);
+		assertEquals("/user/user", viewName);
+		assertNotNull(user);
+		
+//		assertTrue(userAllList.size()>100);//if문과 사용법이 동일하다.
+	}
 
 }

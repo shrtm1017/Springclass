@@ -169,7 +169,7 @@
       });
    </script>
 
-   <form id="frm" action="${request.getContextPath()}/user" method="get">
+   <form id="frm" action="${request.getContextPath()}/user/user" method="get">
       <input type="hidden" id="userId" name="userId" />
    </form>
 
