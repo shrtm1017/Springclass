@@ -28,29 +28,30 @@
 <body>
 	<%-- <%List<UserVo> userList = (List<UserVo>)request.getAttribute("userList");  %> --%>
 	<!-- 정적 include -->
-<%@ include file="/WEB-INF/views/module/header.jsp" %>
+	<%@ include file="/WEB-INF/views/module/header.jsp" %>
 	
 	<%@ include file="/WEB-INF/views/module/footer.jsp" %>
 	
 
 
-
 	<div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
 
 
-		<form id="userfrm" action="${cp }/user/userForm" method="post" class="form-horizontal" role="form" enctype="multipart/form-data">
-			<h1>사용자 등록</h1>
-				<div class="form-group">
+		<form id="userfrm2" action="${cp }/user/userModifyForm" method="post" class="form-horizontal" role="form"
+		enctype="multipart/form-data">
+			<h1>사용자 수정</h1>
+			<div class="form-group">
 					<label for="userNm" class="col-sm-3 control-label">사진</label>
 					<div class="col-sm-9">
-						<input type="file" class="form-control" id="profile" name="profile"
-							placeholder="사진">
+					<img src=""/>
+						<input type="file" class="form-control" id="profile" name="profile" placeholder="사진" >
 					</div>
 				</div>
+			
 				<div class="form-group">
 					<label for="userNm" class="col-sm-3 control-label">사용자 아이디</label>
 					<div class="col-sm-9">
-						<input type="text" class="form-control" id="userId" name="userId" placeholder="사용자 이름">
+						<input type="text" class="form-control" id="userId" name="userId" placeholder="사용자 이름" readonly="userId">
 					</div>
 				</div>
 
@@ -72,7 +73,7 @@
 					<label for="pass" class="col-sm-3 control-label">Password</label>
 					<div class="col-sm-9">
 						<input type="password" class="form-control" id="pass" name="pass"
-							placeholder="******">
+						>
 					</div>
 				</div>
 								<div class="form-group">
@@ -101,7 +102,7 @@
 				</div>
 					<div class="form-group">
 					<div class="col-sm-offset-3 col-sm-9">
-						<button id="regBtn" type="button" class="btn btn-default">사용자 등록</button>
+						<button id="regBtn" type="button" class="btn btn-default">사용자 수정</button>
 					</div>
 				</div>
 				
@@ -117,14 +118,16 @@
 <script>
 
 function initData(){
-	$("#userId").val("${param.userId}");
-	$("#userNm").val("${param.userNm}");
-	$("#alias").val("${param.alias}");
-	$("#addr1").val("${param.addr1}");
-	$("#addr2").val("${param.addr2}");
-	$("#zipcode").val("${param.zipcode}");
-	$("#pass").val("${param.pass}");
-	
+	$("#userId").val("${userVo.userId}");
+	$("#userNm").val("${userVo.userNm}");
+	$("#alias").val("${userVo.alias}");
+	$("#addr1").val("${userVo.addr1}");
+	$("#addr2").val("${userVo.addr2}");
+	$("#zipcode").val("${userVo.zipcode}");
+// 	$("#pass").val("${userVo.pass}");
+	$("#filename").val("${userVo.filename}")
+	$("#realFilename").val("${userVo.realFilename}")
+	$("img").attr("src","${cp}/user/profileImg?userId=${userVo.userId}");
 }
 function clearData(){
 	$("#userId").val("");
@@ -137,6 +140,7 @@ function clearData(){
 	
 }
 $(document).ready(function(){
+	
 	initData();
 // 	if("${msg}" !=""){
 		
@@ -204,13 +208,13 @@ $(document).ready(function(){
 		}
 		//우편번호
 		//비밀번호
-		if($("#pass").val().trim()==""){
-			alert("비밀번호를 입력해주세요");
-			$("#pass").focus();
-			return false;
-		}
+// 		if($("#pass").val().trim()==""){
+// 			alert("비밀번호를 입력해주세요");
+// 			$("#pass").focus();
+// 			return false;
+// 		}
 		//정상적으로 validation이 완료 => form 전송
-		$("#userfrm").submit();
+		$("#userfrm2").submit();
 	});
 	//사용자 등록 버튼 클릭 이벤트
 });

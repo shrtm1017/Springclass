@@ -44,7 +44,7 @@
 
 
 
-		<form id="userUpdatefrm" action="${cp }/userModifyForm" method="get" class="form-horizontal" role="form">
+		<form id="userUpdatefrm" action="${cp }/user/userModifyForm" method="get" class="form-horizontal" role="form">
 		<div class="form-group">
 					<label for="userNm" class="col-sm-3 control-label">사용자 프로필</label>
 					<div class="col-sm-9">
@@ -125,7 +125,9 @@
 <%-- 순서 중요 --%>
 <script
 	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
+
 	<script>
+	
 	function initData(){
 		$("#userId").val("${param.userId}");
 		$("#alias").val("${param.alias}");
@@ -140,6 +142,11 @@
 			
 		})
 	
+	</script>
+		<script >
+		<c:if test="${msg !=null}">
+			alert("${msg}");
+		</c:if>
 	</script>
 </body>
 </html>
