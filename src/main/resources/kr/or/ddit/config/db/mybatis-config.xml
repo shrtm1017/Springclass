@@ -8,6 +8,8 @@
 	<typeAliases>
 		<typeAlias alias="userVo" type="kr.or.ddit.user.model.UserVo"/>
 		<typeAlias alias="pageVo" type="kr.or.ddit.util.model.pageVo"/>
+		<typeAlias alias="LprodVo" type="kr.or.ddit.lprod.model.LprodVo"/>
+		<typeAlias alias="ProdVo" type="kr.or.ddit.prod.model.ProdVo"/>
 	
 	</typeAliases>
   <environments default="development">
@@ -23,7 +25,7 @@
   </environments>
   <mappers>
     <mapper resource="kr/or/ddit/config/db/mapper/user.xml"/>
-<!--     <mapper resource="kr/or/ddit/db/mybatis/mapper/lprod.xml"/> -->
-<!--     <mapper resource="kr/or/ddit/db/mybatis/mapper/prod.xml"/> -->
+    <mapper resource="kr/or/ddit/config/db/mapper/lprod.xml"/>
+    <mapper resource="kr/or/ddit/config/db/mapper//prod.xml"/>
   </mappers>
 </configuration>

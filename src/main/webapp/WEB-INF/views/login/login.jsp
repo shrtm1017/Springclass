@@ -40,7 +40,7 @@
         <label for="inputEmail" class="sr-only">Email address</label>
         <input name="userId"  type="text" id="userId" class="form-control" placeholder="Email address" required autofocus>
         <label for="inputPassword" class="sr-only" >Password</label>
-        <input name="pass" value="brown1234" type="password" id="inputPassword" class="form-control" placeholder="Password" required>
+        <input name="pass" value="ajames" type="password" id="inputPassword" class="form-control" placeholder="Password" required>
         <div class="checkbox">
           <label>
             <input id="rememberme" type="checkbox" value="remember-me" > Remember me
