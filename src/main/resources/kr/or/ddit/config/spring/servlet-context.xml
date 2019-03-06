@@ -19,11 +19,9 @@
 <!-- @Controller 스캔 -->
 <context:annotation-config/>
 <context:component-scan base-package="kr.or.ddit"
-						use-default-filters="true">
-						<context:include-filter type="annotation" expression="org.springframework.stereotype.Service"/>
-<!-- 						<context:include-filter type="annotation" expression="org.springframework.stereotype.Component"/> -->
-						<context:include-filter type="annotation" expression="org.springframework.stereotype.Repository"/>
-	
+						use-default-filters="false">
+	<context:include-filter type="annotation" expression="org.springframework.stereotype.Controller"/>	
+	<context:include-filter type="annotation" expression="org.springframework.web.bind.annotation.ControllerAdvice"/>	
 </context:component-scan>
 <!-- Spring 파일 업로드를 위한 설정 
 	1.multipartResolver등록 (id,name은 multipartResolver로 정의되어있ㅇㅁ)
