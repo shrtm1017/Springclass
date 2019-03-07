@@ -72,6 +72,57 @@ public class UserController {
 
 		return "userPagingTilesList";
 	}
+	/**
+	* Method : userPagingListAjax
+	* 작성자 : PC03
+	* 변경이력 :
+	* @param pageVo
+	* @param model
+	* @return
+	* Method 설명 :사용자 페이지 리스트 ajax 요청 처리
+	*/
+	@RequestMapping("/userPagingListAjax")
+	public String userPagingListAjax(pageVo pageVo, Model model) {
+
+		Map<String, Object> resultMap = IUserService.selectUserPagingList(pageVo);
+
+		model.addAllAttributes(resultMap);
+		model.addAttribute("pageSize", pageVo.getPageSize());
+		model.addAttribute("page", pageVo.getPage());
+		//{ userList : [{userId : 'brown' , userNm:'브라운'}]}
+		// userCnt : "110" 
+		// pageSize : "10"
+		// page : 2
+		//}
+		return "jsonView";
+	}
+	@RequestMapping("/userPagingListAjaxHtml")
+	public String userPagingListAjaxHtml(pageVo pageVo, Model model) {
+
+		Map<String, Object> resultMap = IUserService.selectUserPagingList(pageVo);
+
+		model.addAllAttributes(resultMap);
+		model.addAttribute("pageSize", pageVo.getPageSize());
+		model.addAttribute("page", pageVo.getPage());
+		return "/user/userPagingListAjaxHtml";
+	}
+
+	/**
+	* Method : userPagingListAjaxView
+	* 작성자 : PC03
+	* 변경이력 :
+	* @param pageVo
+	* @param model
+	* @return
+	* Method 설명 :사용자 페이징 리스트 뷰
+	*/
+	@RequestMapping("/userPagingListAjaxView")
+	public String userPagingListAjaxView(pageVo pageVo, Model model) {
+
+		return "userPagingListAjaxTiles";
+	}
+
+
 
 	/**
 	 * Method : user 작성자 : PC03 변경이력 :

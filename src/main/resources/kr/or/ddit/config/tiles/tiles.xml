@@ -28,6 +28,10 @@
 		<definition name="userTiles" extends="layout">
         	<put-attribute name="content" value="/WEB-INF/views/module/userTiles.jsp"/>
         </definition>       
+        
+		<definition name="userPagingListAjaxTiles" extends="layout">
+        	<put-attribute name="content" value="/WEB-INF/views/module/userPagingListAjax.jsp"/>
+        </definition>       
             
                
         
