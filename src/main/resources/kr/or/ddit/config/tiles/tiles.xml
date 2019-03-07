@@ -12,4 +12,24 @@
         	<put-attribute name="content" value="/WEB-INF/views/hello.jsp"/>
         </definition>
         
+        <definition name="layout" template="/WEB-INF/views/module/layout.jsp" >
+             <put-attribute name="header" value="/WEB-INF/views/module/header.jsp"/>
+        	<put-attribute name="footer" value="/WEB-INF/views/module/footer.jsp"/>
+        	<put-attribute name="content" value=""/>
+        </definition>
+        
+        <definition name="userAllListTiles" extends="layout">
+        	<put-attribute name="content" value="/WEB-INF/views/module/userAllListContent.jsp"/>
+        </definition>
+        
+         <definition name="userPagingTilesList" extends="layout">
+        	<put-attribute name="content" value="/WEB-INF/views/module/userPagingTilesList.jsp"/>
+        </definition>
+		<definition name="userTiles" extends="layout">
+        	<put-attribute name="content" value="/WEB-INF/views/module/userTiles.jsp"/>
+        </definition>       
+            
+               
+        
+        
 </tiles-definitions>
