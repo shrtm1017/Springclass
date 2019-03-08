@@ -149,9 +149,29 @@ $("#pagenation").html(html);
  			  
  			  */
  			var htmlArr= data.split("==============seperator===================");
-		  
+ 			//1.html->이벤트 등록  방법 html이 ajax 호출에 의해 정상적으로 생성된 이후
+ 			// 클릭 이벤트 핸들러 등록 sccuss -> ajax 등록
  			$("#userListTbody").html(data);
  			$("#pagenation").html(htmlArr[1]);
+//  	         $(".userTr").on("click", function() {
+//  	            console.log("userTr click");
+//  	            //클릭한 userTr태그의 userId 값을 출력
+//  	            //             var userId = $(this).children()[1].innerText;
+//  	            //             console.log("userId : " + userId);
+
+//  	            var userId = $(this).data("userid");
+
+//  	            // /user
+//  	            // 1. docuemnt
+//  	            //document.location = "/user?userId=" + userId;
+
+//  	            // 2. form
+//  	            $("#userId").val(userId);
+//  	            //$("#frm").attr("action", "/userAllList");
+//  	            $("#frm").submit();
+ 	            
+//  	         });
+
 	console.log(data)
  		  }
 	   });
@@ -160,7 +180,8 @@ $("#pagenation").html(html);
       $(document).ready(function() {
 //     	  getUserPageList(1);
     	  getUserPageListHtml(1);
-    	 
+    	  
+    	
     			//매개변수명은 상관없음
     	 
     	  
@@ -170,26 +191,32 @@ $("#pagenation").html(html);
     	  	<%session.removeAttribute("msg");%>
     	  </c:if>
          console.log("document ready");
+   
+         
+         //2.이벤트 핸들러 대상을 변경(.userTr ->#userListTbody)
+         //동적으로 생성되는 html을 감싸는 영역에 이벤트를 등록
+         // 단 on 옵션에서 감싸는 영역안에 처리되어야할 selector를 명시
+         // #(".userTr").on("click",".userTr", function()){
+        	 
+//          }
+	         $("#userListTbody").on("click",".userTr", function() {
+	            console.log("userTr click");
+	            //클릭한 userTr태그의 userId 값을 출력
+	            //             var userId = $(this).children()[1].innerText;
+	            //             console.log("userId : " + userId);
 
+	            var userId = $(this).data("userid");
+
+	            // /user
+	            // 1. docuemnt
+	            //document.location = "/user?userId=" + userId;
+
+	            // 2. form
+	            $("#userId").val(userId);
+	            //$("#frm").attr("action", "/userAllList");
+	            $("#frm").submit();
+	            });
          //사용자 tr 태그 클릭시 이벤트 핸들러
-         $(".userTr").on("click", function() {
-            console.log("userTr click");
-            //클릭한 userTr태그의 userId 값을 출력
-            //             var userId = $(this).children()[1].innerText;
-            //             console.log("userId : " + userId);
-
-            var userId = $(this).data("userid");
-
-            // /user
-            // 1. docuemnt
-            //document.location = "/user?userId=" + userId;
-
-            // 2. form
-            $("#userId").val(userId);
-            //$("#frm").attr("action", "/userAllList");
-            $("#frm").submit();
-            
-         });
       });
    </script>
 
