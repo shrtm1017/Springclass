@@ -7,14 +7,10 @@ import java.util.Map;
 
 import javax.annotation.Resource;
 
-import org.apache.ibatis.session.SqlSession;
-import org.apache.ibatis.session.SqlSessionFactory;
 import org.springframework.stereotype.Service;
 
-import kr.or.ddit.db.mybatis.MybatisSqlSessionFactoy;
 import kr.or.ddit.encrypt.kisa.sha256.KISA_SHA256;
 import kr.or.ddit.user.dao.IUserDao;
-import kr.or.ddit.user.dao.UserDaoImpl;
 import kr.or.ddit.user.model.UserVo;
 import kr.or.ddit.util.model.pageVo;
 @Service("userService")
@@ -36,10 +32,7 @@ public class UserServiceImpl implements IUserService {
 	*/
 	@Override
 	public List<UserVo> usergetAll() {
-		SqlSessionFactory sessionFactory = MybatisSqlSessionFactoy.getSqlSessionFactory();
-		SqlSession sqlSession = sessionFactory.openSession();
-		List<UserVo> userList = userDao.getAllUser(sqlSession);
-		sqlSession.close();
+		List<UserVo> userList = userDao.getAllUser();
 		return userList;
 	}
 
@@ -54,10 +47,7 @@ public class UserServiceImpl implements IUserService {
 	*/
 	@Override
 	public UserVo selectUser(String vo) {
-		SqlSessionFactory sessionFactory = MybatisSqlSessionFactoy.getSqlSessionFactory();
-		SqlSession sqlSession = sessionFactory.openSession();
-		UserVo userList = userDao.selectUser(sqlSession, vo);
-		sqlSession.close();
+		UserVo userList = userDao.selectUser(vo);
 		return userList;
 	}
 
@@ -65,16 +55,13 @@ public class UserServiceImpl implements IUserService {
 
 	@Override
 	public Map<String,Object> selectUserPagingList(pageVo pageVo) {
-		SqlSessionFactory sessionFactory = MybatisSqlSessionFactoy.getSqlSessionFactory();
-		SqlSession sqlSession = sessionFactory.openSession();
 		
 		Map<String,Object> resultMap = new HashMap<String,Object>();
 		
 		
-		resultMap.put("userList", userDao.selectUserPagingList(sqlSession,pageVo));
-		resultMap.put("userCnt", userDao.getUserCnt(sqlSession));
+		resultMap.put("userList", userDao.selectUserPagingList(pageVo));
+		resultMap.put("userCnt", userDao.getUserCnt());
 		
-		sqlSession.close();
 		return resultMap;
 	}
 
@@ -86,11 +73,7 @@ public class UserServiceImpl implements IUserService {
 
 	@Override
 	public int insertUser(UserVo vo) {
-		SqlSessionFactory sessionFactory = MybatisSqlSessionFactoy.getSqlSessionFactory();
-		SqlSession sqlSession = sessionFactory.openSession();
-		int insertUser = userDao.insertUser(sqlSession, vo);
-		sqlSession.commit();
-		sqlSession.close();
+		int insertUser = userDao.insertUser(vo);
 		
 		return insertUser;
 	}
@@ -99,11 +82,7 @@ public class UserServiceImpl implements IUserService {
 
 	@Override
 	public int deleteUser(String userId) {
-		SqlSessionFactory sessionFactory = MybatisSqlSessionFactoy.getSqlSessionFactory();
-		SqlSession sqlSession = sessionFactory.openSession();
-		int deleteUser = userDao.deleteUser(sqlSession, userId);
-		sqlSession.commit();
-		sqlSession.close();
+		int deleteUser = userDao.deleteUser(userId);
 		
 		return deleteUser;
 	}
@@ -112,11 +91,7 @@ public class UserServiceImpl implements IUserService {
 
 	@Override
 	public int updateUser(UserVo vo) {
-		SqlSessionFactory sessionFactory = MybatisSqlSessionFactoy.getSqlSessionFactory();
-		SqlSession sqlSession = sessionFactory.openSession();
-		int updateUser = userDao.updateUser(sqlSession, vo);
-		sqlSession.commit();
-		sqlSession.close();
+		int updateUser = userDao.updateUser(vo);
 		
 		return updateUser;
 	}
@@ -127,18 +102,14 @@ public class UserServiceImpl implements IUserService {
 	public int encryptPass() {
 		UserVo vo = new UserVo();
 		int encryptPass =0;
-		SqlSessionFactory sessionFactory = MybatisSqlSessionFactoy.getSqlSessionFactory();
-		SqlSession sqlSession = sessionFactory.openSession();
-		List<UserVo> encrytPass = userDao.getAllUser(sqlSession);
+		List<UserVo> encrytPass = userDao.getAllUser();
 		for (int i = 0; i < encrytPass.size(); i++) {
 			String ChangePass = encrytPass.get(i).getPass();
 			String Sha256Pass = KISA_SHA256.encrypt(ChangePass);
 			vo.setPass(Sha256Pass);
 			vo.setUserId(encrytPass.get(i).getUserId());
-			encryptPass += userDao.encryptPass(sqlSession,vo);
+			encryptPass += userDao.encryptPass(vo);
 		}
-		sqlSession.commit();
-		sqlSession.close();
 		return encryptPass;
 		
 	}

@@ -20,24 +20,21 @@ import org.apache.ibatis.session.SqlSessionFactory;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class UserServiceImplTest extends LogicTestConfig{
-	private SqlSession sqlSession;
-	
+	private Logger logger = LoggerFactory.getLogger(UserServiceImplTest.class);
 	@Resource(name="userService")
 	private IUserService userService;
 
 	@Before
 	public void setup() {
-		SqlSessionFactory sqlSessionFactory = MybatisSqlSessionFactoy
-				.getSqlSessionFactory();
-		sqlSession = sqlSessionFactory.openSession();
 		userService.deleteUser("b");
 	}
 
 	@After
 	public void tearDown() {
-		sqlSession.close();
 	}
 
 	// @Test
@@ -56,11 +53,10 @@ public class UserServiceImplTest extends LogicTestConfig{
 	@Test
 	public void testUserServiceImpl() {
 		/*** Given ***/
-		IUserService dao = new UserServiceImpl();
 		/*** When ***/
 		UserVo userVo = new UserVo();
 		userVo.setUserId("brown");
-		UserVo user = dao.selectUser(userVo.getUserId());
+		UserVo user = userService.selectUser(userVo.getUserId());
 
 		/*** Then ***/
 		assertEquals("brown", user.getUserId());
@@ -69,16 +65,14 @@ public class UserServiceImplTest extends LogicTestConfig{
 
 	@Test
 	public void testSelectUserPagingList() {
-		userService = new UserServiceImpl();
 		/*** Given ***/
 		pageVo pageVo = new pageVo(1, 10);
 
 		/*** When ***/
-		Map<String, Object> resultMap = userService
-				.selectUserPagingList(pageVo);
+		Map<String, Object> resultMap = userService.selectUserPagingList(pageVo);
 
 		List<UserVo> userList = (List<UserVo>) resultMap.get("userList");
-		int userCnt = (int) resultMap.get("getUserCnt");
+		int userCnt = (int) resultMap.get("userCnt");
 
 		for (UserVo user : userList) {
 			System.out.println(user);
@@ -92,7 +86,7 @@ public class UserServiceImplTest extends LogicTestConfig{
 		assertEquals(10, userList.size());
 
 		// userCnt
-		assertEquals(105, userCnt);
+		assertEquals(117, userCnt);
 
 	}
 
@@ -114,8 +108,26 @@ public class UserServiceImplTest extends LogicTestConfig{
 		assertEquals(1, userUpdate);
 
 	}
-
 	@Test
+	public void testUserinsert() {
+		/*** Given ***/
+		/*** When ***/
+		UserVo vo = new UserVo();
+		vo.setUserId("aaaTest");
+		vo.setUserNm("a");
+		vo.setZipcode("1");
+		vo.setAddr1("aa");
+		vo.setAddr2("bb");
+		vo.setAlias("aaaaa");
+		vo.setPass("bbbb");
+		int insertUser = userService.insertUser(vo);
+
+		/*** Then ***/
+		assertEquals(1, insertUser);
+
+	}
+
+//	@Test
 	public void encryptPass() {
 		
 		int encryptPass = userService.encryptPass();

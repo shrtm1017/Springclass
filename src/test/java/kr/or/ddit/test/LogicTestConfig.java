@@ -16,8 +16,9 @@ import kr.or.ddit.ranger.controller.RangerControllerTest;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 //로직만 쓸거면 serlvet-context가 필요없다
-@ContextConfiguration({"classpath:kr/or/ddit/config/spring/application-context.xml"})
+@ContextConfiguration({"classpath:kr/or/ddit/config/spring/application-context.xml",
+	"classpath:kr/or/ddit/config/spring/context-datasource.xml",
+	"classpath:kr/or/ddit/config/spring/context-transaction.xml"})
 public class LogicTestConfig {
-	protected Logger logger = LoggerFactory.getLogger(RangerControllerTest.class);
 
 }

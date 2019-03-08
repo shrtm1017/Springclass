@@ -2,8 +2,6 @@ package kr.or.ddit.user.dao;
 
 import java.util.List;
 
-import org.apache.ibatis.session.SqlSession;
-
 import kr.or.ddit.user.model.UserVo;
 import kr.or.ddit.util.model.pageVo;
 
@@ -15,7 +13,7 @@ public interface IUserDao {
 	* @return
 	* Method 설명 : 전체 사용자 조회
 	*/
-	public List<UserVo> getAllUser(SqlSession openSession);
+	public List<UserVo> getAllUser();
 	/**
 	* Method : selectUser
 	* 작성자 : PC03
@@ -24,7 +22,7 @@ public interface IUserDao {
 	* @return
 	* Method 설명 : 사용자 조 회
 	*/
-	public UserVo selectUser(SqlSession openSession,String vo);
+	public UserVo selectUser(String vo);
 	
 	/**
 	* Method : selectUserPagingList
@@ -34,7 +32,7 @@ public interface IUserDao {
 	* @return
 	* Method 설명 : 사용자 페이징 리스트 조회
 	*/
-	public int insertUser(SqlSession openSession,UserVo vo);
+	public int insertUser(UserVo vo);
 	
 	/**
 	* Method : deleteUser
@@ -44,14 +42,14 @@ public interface IUserDao {
 	* @return
 	* Method 설명 :사용자 삭제
 	*/
-	int deleteUser(SqlSession openSession,String userId);
-	public int updateUser(SqlSession openSession,UserVo userId);
+	int deleteUser(String userId);
+	public int updateUser(UserVo userId);
 	
-List<UserVo> selectUserPagingList(SqlSession openSession,pageVo pageVo);
+List<UserVo> selectUserPagingList(pageVo pageVo);
 	
-int getUserCnt(SqlSession openSession);
+int getUserCnt();
 
-int encryptPass(SqlSession openSession,UserVo vo);
+int encryptPass(UserVo vo);
 
 
 }

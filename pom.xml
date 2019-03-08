@@ -165,6 +165,28 @@
     <artifactId>tiles-extras</artifactId>
     <version>3.0.8</version>
 </dependency>
+<!-- https://mvnrepository.com/artifact/org.aspectj/aspectjweaver -->
+<dependency>
+    <groupId>org.aspectj</groupId>
+    <artifactId>aspectjweaver</artifactId>
+    <version>1.9.2</version>
+</dependency>
+<!-- https://mvnrepository.com/artifact/org.mybatis/mybatis-spring -->
+<dependency>
+    <groupId>org.mybatis</groupId>
+    <artifactId>mybatis-spring</artifactId>
+    <version>2.0.0</version>
+</dependency>
+<!-- https://mvnrepository.com/artifact/org.apache.commons/commons-dbcp2 
+	톰캣에서만 돌가는 서버환경을 바꾸기위함-->
+<dependency>
+    <groupId>org.apache.commons</groupId>
+    <artifactId>commons-dbcp2</artifactId>
+    <version>2.6.0</version>
+</dependency>
+
+
+
 
 
 

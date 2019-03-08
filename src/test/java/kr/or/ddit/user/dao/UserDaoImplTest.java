@@ -23,16 +23,12 @@ import org.junit.Test;
 public class UserDaoImplTest  extends LogicTestConfig{
 	@Resource(name="userDao")
 	private IUserDao dao ;
-	private SqlSession sqlSession;
 	@Before
 	public void setup(){
-		SqlSessionFactory  sqlSessionFactory=MybatisSqlSessionFactoy.getSqlSessionFactory();
-		sqlSession= sqlSessionFactory.openSession();
-		
+		dao.deleteUser("test1");
 	}
 	@After
 	public void tearDaow(){
-		sqlSession.close();
 		
 	}
 
@@ -73,7 +69,7 @@ public class UserDaoImplTest  extends LogicTestConfig{
 		//페이지 번호 , 페이지 사이즈 
 		pageVo pageVo =new pageVo(1, 10);
 		/***When***/
-		List<UserVo> userList= dao.selectUserPagingList(sqlSession,pageVo);
+		List<UserVo> userList= dao.selectUserPagingList(pageVo);
 		/***Then***/
 		assertNotNull(userList);
 		assertEquals(10,userList.size());
@@ -91,9 +87,9 @@ public class UserDaoImplTest  extends LogicTestConfig{
 	public void testgetUserCnt(){
 		/***Given***/
 		/***When***/
-		int userCnt =dao.getUserCnt(sqlSession);
+		int userCnt =dao.getUserCnt();
 		/***Then***/
-		assertEquals(114, userCnt);
+		assertEquals(117, userCnt);
 		
 	}
 	
@@ -124,9 +120,9 @@ public class UserDaoImplTest  extends LogicTestConfig{
 		vo.setAddr2("bb");
 		vo.setAlias("aaaaa");
 		vo.setPass("bbbb");
-		int userInsert = dao.insertUser(sqlSession,vo);
+		int userInsert = dao.insertUser(vo);
 		
-		dao.deleteUser(sqlSession,"b");
+		dao.deleteUser("b");
 		/***Then***/
 		assertEquals(1, userInsert);
 
@@ -144,7 +140,7 @@ public class UserDaoImplTest  extends LogicTestConfig{
 		vo.setAddr2("bb");
 		vo.setAlias("aaaaa");
 		vo.setPass("bbbb");
-		int userUpdate = dao.updateUser(sqlSession,vo);
+		int userUpdate = dao.updateUser(vo);
 		
 		/***Then***/
 		assertEquals(1, userUpdate);
